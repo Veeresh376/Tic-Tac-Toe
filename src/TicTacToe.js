@@ -7,6 +7,7 @@ const TicTacToe = () => {
 	const [cells, setCells] = useState(Array(9).fill(''));
 	const [winner, setWinner] = useState();
 
+	const api = "https://jsonplaceholder.typicode.com/posts/1";
 	const checkForWinner = (squares) => {
 		let combos = {
 			across: [
@@ -101,6 +102,7 @@ const TicTacToe = () => {
 			{winner && (
 				<>
 					<p>{winner} is the winner!</p>
+					
 				</>
 			)}
 		</div>
