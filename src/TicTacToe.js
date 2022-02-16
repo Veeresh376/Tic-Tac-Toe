@@ -2,10 +2,12 @@ import React, { useState } from 'react';
 
 import './TicTacToe.css';
 
+let count = 0;
 const TicTacToe = () => {
-    const [turn, setTurn] = useState('x');
+	const [turn, setTurn] = useState('x');
 	const [cells, setCells] = useState(Array(9).fill(''));
 	const [winner, setWinner] = useState();
+
 
 	const api = "https://jsonplaceholder.typicode.com/posts/1";
 	const checkForWinner = (squares) => {
@@ -40,12 +42,13 @@ const TicTacToe = () => {
 				) {
 					setWinner(squares[pattern[0]]);
 				}
-                
+
 			});
 		}
 	};
 
 	const handleClick = (num) => {
+		count += 1;
 		if (cells[num] !== '') {
 			alert('already clicked');
 			return;
@@ -66,6 +69,7 @@ const TicTacToe = () => {
 	};
 
 	const handleRestart = () => {
+		count = 0;
 		setWinner(null);
 		setCells(Array(9).fill(''));
 	};
@@ -96,15 +100,16 @@ const TicTacToe = () => {
 					</tr>
 				</tbody>
 			</table>
-            
+
 			<button onClick={() => handleRestart()}>RESET</button>
 
 			{winner && (
 				<>
 					<p>{winner} is the winner!</p>
-					
+
 				</>
 			)}
+			{!winner && count === 9 && <><p>Its a tie</p></>}
 		</div>
 	);
 };
